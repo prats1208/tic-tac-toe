@@ -1,0 +1,13 @@
+header img{
+    width: 5rem;
+    object-fit: contain;
+    margin: 3rem auto 1rem auto;
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.4));
+}
+
+.h1class{
+    font-family: 'Caprasimo', cursive;
+    font-size: 3rem;
+    margin: 0 auto 3rem auto;
+    color: #3f3b00;
+  }
