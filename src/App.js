@@ -6,13 +6,27 @@ import Player from "./Components/Players/Player";
 import { useState } from "react";
 
 function App() {
-
   const [activePlayer, setActivePlayer] = useState("X");
 
-  function handleSelectSquare() {
+  const [gameTurns, setGameTurns] = useState([]);
+
+  
+
+  function handleSelectSquare(rowIndex, colIndex) {
     setActivePlayer((prevActivePlayer) =>
       prevActivePlayer === "X" ? "0" : "X"
     );
+
+    setGameTurns((prevGameTurns) => {
+      let currentPlayer = "X";
+      if (prevGameTurns.length > 0 && prevGameTurns[0].player == "X") {
+        currentPlayer = "0";
+      }
+      return [
+        { square: { row: rowIndex, col: colIndex }, player: currentPlayer},
+        ...prevGameTurns,
+      ];
+    });
   }
 
   return (
@@ -21,13 +35,21 @@ function App() {
       <main>
         <div id="game-container">
           <ol id="players" className="highlight-player">
-            <Player name="Yogs" symbol="X" isActive={activePlayer=='X'}/> {/* in respective component, respective symbol will be activePlayer */}
-            <Player name="Prats" symbol="0" isActive={activePlayer=='0'}/>
+            <Player name="Yogs" symbol="X" isActive={activePlayer == "X"} />{" "}
+            {/* in respective component, respective symbol will be activePlayer */}
+            <Player name="Prats" symbol="0" isActive={activePlayer == "0"} />
           </ol>
-          <Gameboard onSelectSquare={handleSelectSquare} activePlayer={activePlayer} />
+          <Gameboard
+            onSelectSquare={handleSelectSquare}
+            gameTurns={gameTurns}
+          />
         </div>
       </main>
-      <Log/>
+      <ol>
+        {gameTurns.map((g) => (
+          <Log gameTurn={g} />
+        ))}
+      </ol>
     </div>
   );
 }

@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "./Gameboard.css";
 
-
-const Gameboard = ({onSelectSquare,activePlayer}) => {
-
+const Gameboard = ({ onSelectSquare, gameTurns }) => {
   // game board data structure
   const initialGameboard = [
     [null, null, null],
@@ -11,17 +9,26 @@ const Gameboard = ({onSelectSquare,activePlayer}) => {
     [null, null, null],
   ];
 
-  const [gameBoard, setGameBoard] = useState(initialGameboard);
+  // const [gameBoard, setGameBoard] = useState(initialGameboard);
+  // function handleSelectSquare(rowIndex, colIndex) {
+  //   setGameBoard((prevGameBoard) => {
+  //     //immutable way of updating state
+  //     const updatedGameBoard = [
+  //       ...prevGameBoard.map((innerArray) => [...innerArray]),
+  //     ];
+  //     updatedGameBoard[rowIndex][colIndex] = activePlayer;
+  //     return updatedGameBoard;
+  //   });
 
-  function handleSelectSquare(rowIndex, colIndex) {
-    setGameBoard((prevGameBoard) => {
-       //immutable way of updating state
-        const updatedGameBoard = [...prevGameBoard.map(innerArray => [...innerArray])]; 
-        updatedGameBoard[rowIndex][colIndex]=activePlayer;
-        return updatedGameBoard;
-    });
-
-    onSelectSquare();
+  //   onSelectSquare();
+  // }
+  
+  let gameBoard = initialGameboard;
+ 
+  for (const gameTurn of gameTurns) {
+    const { square, player } = gameTurn; //destructurig
+    const { row, col } = square;
+    gameBoard[row][col] = player;
   }
 
   return (
@@ -30,9 +37,11 @@ const Gameboard = ({onSelectSquare,activePlayer}) => {
         <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, colIndex) => (
-              <button onClick={() => handleSelectSquare(rowIndex, colIndex)}>
-                {playerSymbol}
-              </button>
+              <li key={colIndex}>
+                <button onClick={() => {onSelectSquare(rowIndex, colIndex);}} >
+                  {playerSymbol}
+                </button>
+              </li>
             ))}
           </ol>
         </li>

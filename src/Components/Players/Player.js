@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import "./Player.css";
 
-const Player = ({ name, symbol , isActive }) => {
+const Player = ({ name, symbol, isActive }) => {
   const [playerName, setPlayerName] = useState(name);
   const [isEditable, setIsEditable] = useState(false);
 
-  
   return (
     <>
       <li className={isActive ? "active" : undefined}>
@@ -23,7 +22,9 @@ const Player = ({ name, symbol , isActive }) => {
           )}
           <span className="player-symbol">{symbol}</span>
         </span>
-        <button className="btn" onClick={() => setIsEditable((isEditable)=>!isEditable)}>
+        <button
+          className="btn"
+          onClick={() => setIsEditable((isEditable) => !isEditable)}>
           {isEditable ? "Save" : "Edit"}
         </button>
       </li>

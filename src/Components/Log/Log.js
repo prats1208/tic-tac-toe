@@ -1,10 +1,11 @@
 import React from 'react'
 
-const Log = () => {
+const Log = ({gameTurn}) => {
+  console.log(gameTurn.player);
   return (
-    <>
-    <p></p>
-    </>
+    <li>
+      {gameTurn.player} clicked on square box {gameTurn.square.row}-{gameTurn.square.col}
+    </li>
   )
 }
 
