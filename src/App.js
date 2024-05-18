@@ -1,25 +1,33 @@
-import './App.css';
-import Gameboard from './Components/Gameboard/Gameboard';
-import Header from './Components/Header/Header';
-import Player from './Components/Players/Player';
-import { useState } from 'react';
+import "./App.css";
+import Gameboard from "./Components/Gameboard/Gameboard";
+import Header from "./Components/Header/Header";
+import Log from "./Components/Log/Log";
+import Player from "./Components/Players/Player";
+import { useState } from "react";
 
 function App() {
 
-  const [info,setInfo]=useState({name:'',symbol:''});
+  const [activePlayer, setActivePlayer] = useState("X");
+
+  function handleSelectSquare() {
+    setActivePlayer((prevActivePlayer) =>
+      prevActivePlayer === "X" ? "0" : "X"
+    );
+  }
+
   return (
     <div className="App">
-      <Header/>
+      <Header />
       <main>
-        <div id='game-container'>
-          <ol id='players'>
-            <Player name="Yogs" symbol="0" setInfo={setInfo}/>
-            <Player name="Prats" symbol="X" setInfo={setInfo}/>
+        <div id="game-container">
+          <ol id="players" className="highlight-player">
+            <Player name="Yogs" symbol="X" isActive={activePlayer=='X'}/> {/* in respective component, respective symbol will be activePlayer */}
+            <Player name="Prats" symbol="0" isActive={activePlayer=='0'}/>
           </ol>
-          <Gameboard/>
+          <Gameboard onSelectSquare={handleSelectSquare} activePlayer={activePlayer} />
         </div>
-        
       </main>
+      <Log/>
     </div>
   );
 }

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./Player.css";
 
-const Player = ({ name, symbol , setInfo }) => {
+const Player = ({ name, symbol , isActive }) => {
   const [playerName, setPlayerName] = useState(name);
   const [isEditable, setIsEditable] = useState(false);
 
+  
   return (
     <>
-      <li>
+      <li className={isActive ? "active" : undefined}>
         <span className="player">
           {isEditable ? (
             <input

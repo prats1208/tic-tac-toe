@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./Gameboard.css";
-const Gameboard = () => {
+
+
+const Gameboard = ({onSelectSquare,activePlayer}) => {
+
+  // game board data structure
   const initialGameboard = [
     [null, null, null],
     [null, null, null],
@@ -11,11 +15,13 @@ const Gameboard = () => {
 
   function handleSelectSquare(rowIndex, colIndex) {
     setGameBoard((prevGameBoard) => {
-       
-        const updatedGameBoard = [...prevGameBoard.map(innerArray => [...innerArray])];
-        updatedGameBoard[rowIndex][colIndex]='X';
+       //immutable way of updating state
+        const updatedGameBoard = [...prevGameBoard.map(innerArray => [...innerArray])]; 
+        updatedGameBoard[rowIndex][colIndex]=activePlayer;
         return updatedGameBoard;
     });
+
+    onSelectSquare();
   }
 
   return (
