@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Log = ({player,symbol}) => {
+const Log = () => {
   return (
     <>
-    <p>{player} clicked {symbol}</p>
+    <p></p>
     </>
   )
 }
