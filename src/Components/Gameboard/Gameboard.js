@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./Gameboard.css";
 
-const Gameboard = ({ onSelectSquare, gameTurns }) => {
+const Gameboard = ({ onSelectSquare, gameBoard }) => {
   // game board data structure
-  const initialGameboard = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-  ];
-
+  // const initialGameboard = [
+  //   [null, null, null],
+  //   [null, null, null],
+  //   [null, null, null],
+  // ];
+  //independent gameboard state in gameboard component
   // const [gameBoard, setGameBoard] = useState(initialGameboard);
   // function handleSelectSquare(rowIndex, colIndex) {
   //   setGameBoard((prevGameBoard) => {
@@ -23,13 +23,14 @@ const Gameboard = ({ onSelectSquare, gameTurns }) => {
   //   onSelectSquare();
   // }
   
-  let gameBoard = initialGameboard;
+  //derived gameboard from gameturns state
+  // let gameBoard = initialGameboard;
  
-  for (const gameTurn of gameTurns) {
-    const { square, player } = gameTurn; //destructurig
-    const { row, col } = square;
-    gameBoard[row][col] = player;
-  }
+  // for (const gameTurn of gameTurns) {
+  //   const { square, player } = gameTurn; //destructuring
+  //   const { row, col } = square;
+  //   gameBoard[row][col] = player;
+  // }
 
   return (
     <ol id="game-board">
@@ -38,7 +39,7 @@ const Gameboard = ({ onSelectSquare, gameTurns }) => {
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={() => {onSelectSquare(rowIndex, colIndex);}} >
+                <button onClick={() => {onSelectSquare(rowIndex, colIndex);}} disabled={playerSymbol!=null}>
                   {playerSymbol}
                 </button>
               </li>

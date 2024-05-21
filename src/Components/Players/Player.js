@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import "./Player.css";
 
-const Player = ({ name, symbol, isActive }) => {
+const Player = ({ name, symbol, isActive,onChangeName }) => {
   const [playerName, setPlayerName] = useState(name);
   const [isEditable, setIsEditable] = useState(false);
+
+function handleClick(){
+  setIsEditable((isEditable) => !isEditable);
+  if(isEditable){
+    onChangeName(symbol,playerName);
+  }
+}
 
   return (
     <>
@@ -24,7 +31,7 @@ const Player = ({ name, symbol, isActive }) => {
         </span>
         <button
           className="btn"
-          onClick={() => setIsEditable((isEditable) => !isEditable)}>
+          onClick={handleClick}>
           {isEditable ? "Save" : "Edit"}
         </button>
       </li>
